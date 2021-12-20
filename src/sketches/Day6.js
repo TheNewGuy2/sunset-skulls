@@ -10,8 +10,8 @@ import Sketch from "react-p5";
 	const setup = (p5, canvasParentRef) => {
 		// use parent to render the canvas in this ref
 		// (without that p5 will render the canvas outside of your component)
-		const canvasWidth = 700;
-		const canvasHeight = 900;
+		const canvasWidth = 800;
+		const canvasHeight = 700;
 		p5.createCanvas(canvasWidth, canvasHeight).parent(canvasParentRef);
 		p5.randomSeed(50)
 		p5.frameRate(p5.random(0.2, 3))
@@ -29,8 +29,8 @@ import Sketch from "react-p5";
 		const m = 8;
 		const n = 20;
 		const o = 44;
-		const canvasWidth = 700;
-		const canvasHeight = 900;
+		const canvasWidth = 800;
+		const canvasHeight = 700;
 		//top  
 		const MtopR = 110 * p5.noise(p5.frameCount / m);
 		const MtopG = 15 * p5.noise(1000 + p5.frameCount / o);
