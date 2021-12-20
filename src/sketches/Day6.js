@@ -1,8 +1,8 @@
 import React from "react";
 import Sketch from "react-p5";
 
-	let x = 50;
-	let y = 50;
+//	let x = 50;
+//	let y = 50;
 //
 
 
@@ -26,7 +26,6 @@ import Sketch from "react-p5";
 		// NOTE: Do not use setState in the draw function or in functions that are executed
 		// in the draw function...
 		// please use normal variables or class properties for these purposes
-		x++;
 		const m = 8;
 		const n = 20;
 		const o = 44;
