@@ -32,9 +32,9 @@ import Sketch from "react-p5";
 		const o = 22;
 		const canvasWidth = 600;
 		const canvasHeight = 600;
-		let hr = p5.hour();
-		let mn = p5.minute();
-		let sc = p5.second();
+		const hr = p5.hour();
+		const mn = p5.minute();
+		const sc = p5.second();
 	  
 		//top  
 		const MtopR = 110 * p5.noise(p5.frameCount / m);
