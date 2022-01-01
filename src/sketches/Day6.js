@@ -94,14 +94,14 @@ import Sketch from "react-p5";
 		p5.stroke(p5.color(255, 255, 255));
 		p5.noFill();
 		let secondAngle = p5.map(sc, 0, 60, -90, 360);
-		p5.arc(p5.width/2, p5.height/2, 330, 330, -90, secondAngle);
+		p5.arc(p5.width/2, p5.height/2, 440, 440, -90, secondAngle);
 		//minute angel rotation 
 		//  stroke('Black');
 		let minuteAngle = p5.map(mn, 0, 60, 0, 360);
-		p5.arc(p5.width/2, p5.height/2, 390, 390, -90, minuteAngle);
+		p5.arc(p5.width/2, p5.height/2, 420, 420, -90, minuteAngle);
 		//  stroke('#58B95F');
 		let hourAngle = p5.map(hr % 12, 0, 12, 0, 360);
-		p5.arc(p5.width/2, p5.height/2, 420, 420, -90, hourAngle);
+		p5.arc(p5.width/2, p5.height/2, 390, 390, -90, hourAngle);
 		//inside second line movement 
 
 
