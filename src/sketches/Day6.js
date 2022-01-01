@@ -99,11 +99,11 @@ import Sketch from "react-p5";
 		//minute angel rotation 
 
 		//  stroke('Black');
-		let minuteAngle = p5.map(mn, 0, 60, 0, 360);
+//		let minuteAngle = p5.map(mn, 0, 60, 0, 360);
 		//  arc(0, 0, 280, 280, 0, minuteAngle);
 
 		//  stroke('#58B95F');
-		let hourAngle = p5.map(hr % 12, 0, 12, 0, 360);
+//		let hourAngle = p5.map(hr % 12, 0, 12, 0, 360);
 		//  arc(width/2, height/2, 360, 360, 0, hourAngle);
 		//inside second line movement 
 
