@@ -10,12 +10,13 @@ import Sketch from "react-p5";
 	const setup = (p5, canvasParentRef) => {
 		// use parent to render the canvas in this ref
 		// (without that p5 will render the canvas outside of your component)
-		const canvasWidth = 800;
-		const canvasHeight = 700;
+		const canvasWidth = 600;
+		const canvasHeight = 600;
 		p5.createCanvas(canvasWidth, canvasHeight).parent(canvasParentRef);
 		p5.randomSeed(50)
 		p5.frameRate(p5.random(0.2, 3))
-//	  
+		p5.angleMode(p5.DEGREES);
+		//	  
 
 	};
 //test for real
@@ -26,11 +27,15 @@ import Sketch from "react-p5";
 		// NOTE: Do not use setState in the draw function or in functions that are executed
 		// in the draw function...
 		// please use normal variables or class properties for these purposes
-		const m = 8;
-		const n = 20;
-		const o = 44;
-		const canvasWidth = 800;
-		const canvasHeight = 700;
+		const m = 4;
+		const n = 10;
+		const o = 22;
+		const canvasWidth = 600;
+		const canvasHeight = 600;
+		let hr = p5.hour();
+		let mn = p5.minute();
+		let sc = p5.second();
+	  
 		//top  
 		const MtopR = 110 * p5.noise(p5.frameCount / m);
 		const MtopG = 15 * p5.noise(1000 + p5.frameCount / o);
@@ -54,7 +59,7 @@ import Sketch from "react-p5";
 		const topB = 1 * p5.noise(7000 + p5.frameCount / n);
 		const bottomR = 255 * p5.noise(8000 + p5.frameCount / o);
 		const bottomG = 255 * p5.noise(9000  + p5.frameCount / o);
-		const bottomB = 1 * p5.noise(10000 + p5.frameCount / m);
+		const bottomB = 175 * p5.noise(10000 + p5.frameCount / m);
 	  
 		const topColor = p5.color(topR, topG, topB);
 		const bottomColor = p5.color(bottomR, bottomG, bottomB);
@@ -71,7 +76,7 @@ import Sketch from "react-p5";
 		const TtopB = 1 * p5.noise(11000 + p5.frameCount / o);
 		const TbottomR = 255 * p5.noise(13000 + p5.frameCount / n);
 		const TbottomG = 255 * p5.noise(14000  + p5.frameCount / o);
-		const TbottomB = 1 * p5.noise(15000 + p5.frameCount / o);
+		const TbottomB = 200 * p5.noise(15000 + p5.frameCount / o);
 	  
 		const TtopColor = p5.color(TtopR, TtopG, TtopB);
 		const TbottomColor = p5.color(TbottomR, TbottomG, TbottomB);
@@ -83,17 +88,46 @@ import Sketch from "react-p5";
 		  p5.line(0, x, canvasWidth, x);
 		}
 		var randomValue = p5.random();
+		//second angel rotation 
+  
+		//  strokeWeight(2);
+		p5.stroke(p5.color(255, 255, 255));
+		p5.noFill();
+		let secondAngle = p5.map(sc, 0, 60, -90, 360);
+		p5.arc(p5.width/2, p5.height/2, 300, 300, -90, secondAngle);
+
+		//minute angel rotation 
+
+		//  stroke('Black');
+		let minuteAngle = p5.map(mn, 0, 60, 0, 360);
+		//  arc(0, 0, 280, 280, 0, minuteAngle);
+
+		//  stroke('#58B95F');
+		let hourAngle = p5.map(hr % 12, 0, 12, 0, 360);
+		//  arc(width/2, height/2, 360, 360, 0, hourAngle);
+		//inside second line movement 
+
+
+
+
 		if(randomValue < 0.93){
 			p5.text("BetterDays", 25, 55);
 //			<Sketch drawSkull={drawSkull (p5.width/2, p5.height/2, p5.random(100, 250), p5.random(100, 250), MbottomColor)} />;
 
-			drawSkull (p5, canvasWidth/2, canvasHeight/2, p5.random(100, 250), p5.random(100, 250), MbottomColor);
-	  //    drawSkull(width/2, height/2, 250, 250, MbottomColor);
+			p5.translate(300,300)
+			p5.push();
+			p5.rotate(secondAngle+90);
+		  	drawSkull (p5, 0, 0, p5.random(250, 250), p5.random(250, 250), MbottomColor);
+			p5.pop()
+			  //    drawSkull(width/2, height/2, 250, 250, MbottomColor);
 		}
 		else{
 			p5.text("BreakAways", p5.width/2, p5.height/2,);
-		  drawSkull (p5, p5.random(p5.width), p5.random(p5.height), p5.random(10, 220), p5.random(10, 230), MbottomColor, canvasWidth, canvasHeight);
-//		  drawSkull (p5.mouseX, p5.mouseY, p5.random(10, 220), p5.random(10, 230), MbottomColor);
+			p5.push();
+			p5.rotate(secondAngle+90);
+		  	drawSkull (p5, p5.random(p5.width), p5.random(p5.height), p5.random(10, 220), p5.random(10, 230), MbottomColor, canvasWidth, canvasHeight);
+			p5.pop()
+			  //		  drawSkull (p5.mouseX, p5.mouseY, p5.random(10, 220), p5.random(10, 230), MbottomColor);
 		}  
 		// Try passing in mouseX and mouseY!
 	  //  drawSkull(width/2, height/2, random(10, 220), random(10, 250), MbottomColor);
@@ -108,8 +142,8 @@ import Sketch from "react-p5";
 	const drawSkull=(p5, skullX, skullY, skullWidth, skullHeight, MbottomColor, canvasWidth, canvasHeight) =>{
 
 		// Change the fill color to a random color.
-		var funColor = p5.random(255);
-		var funColor2 = p5.random(255);
+		var funColor = p5.random(1,25);
+		var funColor2 = p5.random(25, 55);
 	  //  fill(random(255), random(255), random(255));
 	  	p5.fill(funColor,funColor2, funColor);
 	  	p5.noStroke();
