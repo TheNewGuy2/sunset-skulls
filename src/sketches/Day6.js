@@ -93,15 +93,15 @@ import Sketch from "react-p5";
 		//  strokeWeight(2);
 		p5.stroke(p5.color(255, 255, 255));
 		p5.noFill();
-		let secondAngle = p5.map(sc, 0, 60, -90, 360);
-		p5.arc(p5.width/2, p5.height/2, 440, 440, -90, secondAngle);
+		let secondAngle = p5.map(sc, 0, 59, 0, 360);
+		p5.arc(p5.width/2, p5.height/2, 320, 320, -90, secondAngle-90);
 		//minute angel rotation 
 		//  stroke('Black');
-		let minuteAngle = p5.map(mn, 0, 60, 0, 360);
-		p5.arc(p5.width/2, p5.height/2, 420, 420, -90, minuteAngle);
+		let minuteAngle = p5.map(mn, 0, 59, 0, 360);
+		p5.arc(p5.width/2, p5.height/2, 360, 360, -90, minuteAngle-90);
 		//  stroke('#58B95F');
 		let hourAngle = p5.map(hr % 12, 0, 12, 0, 360);
-		p5.arc(p5.width/2, p5.height/2, 390, 390, -90, hourAngle);
+		p5.arc(p5.width/2, p5.height/2, 390, 390, -90, hourAngle-90);
 		//inside second line movement 
 
 
@@ -113,7 +113,7 @@ import Sketch from "react-p5";
 
 			p5.translate(300,300)
 			p5.push();
-			p5.rotate(secondAngle+90);
+			p5.rotate(secondAngle);
 		  	drawSkull (p5, 0, 0, p5.random(250, 250), p5.random(250, 250), MbottomColor);
 			p5.pop()
 			  //    drawSkull(width/2, height/2, 250, 250, MbottomColor);
@@ -121,7 +121,7 @@ import Sketch from "react-p5";
 		else{
 			p5.text("BreakAways", p5.width/2, p5.height/2,);
 			p5.push();
-			p5.rotate(secondAngle+90);
+			p5.rotate(secondAngle);
 		  	drawSkull (p5, p5.random(p5.width), p5.random(p5.height), p5.random(10, 220), p5.random(10, 230), MbottomColor, canvasWidth, canvasHeight);
 			p5.pop()
 			  //		  drawSkull (p5.mouseX, p5.mouseY, p5.random(10, 220), p5.random(10, 230), MbottomColor);
