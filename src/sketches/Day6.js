@@ -13,8 +13,8 @@ import Sketch from "react-p5";
 		const canvasWidth = 600;
 		const canvasHeight = 600;
 		p5.createCanvas(canvasWidth, canvasHeight).parent(canvasParentRef);
-		p5.randomSeed(50)
-		p5.frameRate(p5.random(0.2, 3))
+		p5.randomSeed(500)
+		p5.frameRate(p5.random(2, 3))
 		p5.angleMode(p5.DEGREES);
 		//	  
 
@@ -27,9 +27,9 @@ import Sketch from "react-p5";
 		// NOTE: Do not use setState in the draw function or in functions that are executed
 		// in the draw function...
 		// please use normal variables or class properties for these purposes
-		const m = 4;
-		const n = 10;
-		const o = 22;
+		const m = 4;//4
+		const n = 10;//10
+		const o = 22;//22
 		const canvasWidth = 600;
 		const canvasHeight = 600;
 		const hr = p5.hour();
@@ -37,53 +37,57 @@ import Sketch from "react-p5";
 		const sc = p5.second();
 	  
 		//top  
-		const MtopR = 110 * p5.noise(p5.frameCount / m);
-		const MtopG = 15 * p5.noise(1000 + p5.frameCount / o);
-		const MtopB = 255 * p5.noise(2000 + p5.frameCount / n);
-		const MbottomR = 255 * p5.noise(3000 + p5.frameCount / m);
+		const MtopR = 110 * p5.noise(p5.frameCount / o);
+		const MtopG = 15 * p5.noise(1000 + p5.frameCount / n);
+//		const MtopB = 255;
+		const MtopB = 92 * p5.noise(2000 + p5.frameCount / n);
+		const MbottomR = 39 * p5.noise(3000 + p5.frameCount / m);
 		const MbottomG = 1 * p5.noise(4000  + p5.frameCount / n);
+//		const MbottomB = 100;
 		const MbottomB = 100 * p5.noise(5000 + p5.frameCount / m);
 	  
 		const MtopColor = p5.color(MtopR, MtopG, MtopB);
 		const MbottomColor = p5.color(MbottomR, MbottomG, MbottomB);
 		
-		for(let y = p5.noise(0); y < 255; y++) {
-		  const MlineColor = p5.lerpColor(MtopColor, MbottomColor, y / canvasHeight);
+		for(let y = 0; y < 0; y++) {
+		  const MlineColor = p5.lerpColor(MtopColor, MbottomColor, y / p5.height);
 	  
-		  p5.stroke(MlineColor);
-		  p5.line(0, y, canvasWidth, y);
+//		  p5.stroke(MlineColor);
+//		  p5.line(0, y, canvasWidth, y);
 		}
 		//mid  
-		const topR = 255 * p5.noise(p5.frameCount / o);
+		const topR = 253 * p5.noise(p5.frameCount / o);
 		const topG = 100 * p5.noise(6000 + p5.frameCount / o);
 		const topB = 1 * p5.noise(7000 + p5.frameCount / n);
 		const bottomR = 255 * p5.noise(8000 + p5.frameCount / o);
-		const bottomG = 255 * p5.noise(9000  + p5.frameCount / o);
-		const bottomB = 175 * p5.noise(10000 + p5.frameCount / m);
+		const bottomG = 100 * p5.noise(9000  + p5.frameCount / o);
+		const bottomB = (1+mn) * p5.noise(10000 + p5.frameCount / m);
 	  
-		const topColor = p5.color(topR, topG, topB);
-		const bottomColor = p5.color(bottomR, bottomG, bottomB);
+		const topColor = p5.color(topR, topG, topB, mn * 3);
+		const bottomColor = p5.color(bottomR, bottomG, bottomB, mn * 3);
 		
-		for(let z = p5.noise(200); z < 375; z++) {
-		  const lineColor = p5.lerpColor(topColor, bottomColor, z / canvasHeight);
+		for(let z = 0; z < p5.height; z++) {
+		  const lineColor = p5.lerpColor(topColor, bottomColor, z/canvasHeight);
 	  
-		  p5.stroke(lineColor);
-		  p5.line(0, z, canvasWidth, z);
+//		  p5.stroke(lineColor);
+//		  p5.line(0, z, canvasWidth, z);
 		}
 	  //bottom  
-		const TtopR = 255 * p5.noise(p5.frameCount / m);
+		const TtopR = 253 * p5.noise(p5.frameCount / o);
 		const TtopG = 100 * p5.noise(10000 + p5.frameCount / n);
 		const TtopB = 1 * p5.noise(11000 + p5.frameCount / o);
 		const TbottomR = 255 * p5.noise(13000 + p5.frameCount / n);
 		const TbottomG = 255 * p5.noise(14000  + p5.frameCount / o);
-		const TbottomB = 200 * p5.noise(15000 + p5.frameCount / o);
+//		const TbottomR = 255;
+//		const TbottomG = 255;
+		const TbottomB = (25+sc) * p5.noise(15000 + p5.frameCount / o);
 	  
-		const TtopColor = p5.color(TtopR, TtopG, TtopB);
-		const TbottomColor = p5.color(TbottomR, TbottomG, TbottomB);
+		const TtopColor = p5.color(TtopR, TtopG, TtopB, sc * 3 );
+		const TbottomColor = p5.color(TbottomR, TbottomG, TbottomB, mn * 3);
 		
-		for(let x = p5.noise(313); x < p5.height; x++) {
-		  const TlineColor = p5.lerpColor(TtopColor, TbottomColor, x / canvasHeight);
-	  
+		for(let x = 0; x < p5.height; x++) {
+		  const TlineColor = p5.lerpColor(TtopColor, TbottomColor, x/canvasHeight);
+			
 		  p5.stroke(TlineColor);
 		  p5.line(0, x, canvasWidth, x);
 		}
@@ -107,7 +111,7 @@ import Sketch from "react-p5";
 
 
 
-		if(randomValue < 0.93){
+		if(randomValue < 0.97){
 			p5.text("BetterDays", 25, 55);
 //			<Sketch drawSkull={drawSkull (p5.width/2, p5.height/2, p5.random(100, 250), p5.random(100, 250), MbottomColor)} />;
 
