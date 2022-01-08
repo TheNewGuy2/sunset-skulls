@@ -50,10 +50,10 @@ import Sketch from "react-p5";
 		const MbottomColor = p5.color(MbottomR, MbottomG, MbottomB);
 		
 		for(let y = 0; y < 0; y++) {
-//		  const MlineColor = p5.lerpColor(MtopColor, MbottomColor, y / p5.height);
+		  const MlineColor = p5.lerpColor(MtopColor, MbottomColor, y / p5.height);
 	  
-//		  p5.stroke(MlineColor);
-//		  p5.line(0, y, canvasWidth, y);
+		  p5.stroke(MlineColor);
+		  p5.line(0, y, canvasWidth, y);
 		}
 		//mid  
 		const topR = 253 * p5.noise(p5.frameCount / o);
@@ -66,11 +66,11 @@ import Sketch from "react-p5";
 		const topColor = p5.color(topR, topG, topB, mn * 3);
 		const bottomColor = p5.color(bottomR, bottomG, bottomB, mn * 3);
 		
-		for(let z = 0; z < p5.height; z++) {
-//		  const lineColor = p5.lerpColor(topColor, bottomColor, z/canvasHeight);
+		for(let z = 0; z < 0; z++) {
+		  const lineColor = p5.lerpColor(topColor, bottomColor, z/canvasHeight);
 	  
-//		  p5.stroke(lineColor);
-//		  p5.line(0, z, canvasWidth, z);
+		  p5.stroke(lineColor);
+		  p5.line(0, z, canvasWidth, z);
 		}
 	  //bottom  
 		const TtopR = 253 * p5.noise(p5.frameCount / o);
