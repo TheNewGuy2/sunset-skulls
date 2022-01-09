@@ -104,6 +104,7 @@ const simplex = new SimplexNoise();
 	  
 		const TtopColor = p5.color(TtopR, TtopG, TtopB, sc * 3 );
 		const TbottomColor = p5.color(TbottomR, TbottomG, TbottomB, mn * 3);
+		const TlineColor = p5.lerpColor(TtopColor, TbottomColor, ((sc)/(canvasHeight+mn)));
 		
 		for(let x = 0; x < p5.height; x++) {
 		  const TlineColor = p5.lerpColor(TtopColor, TbottomColor, ((x+sc)/(canvasHeight+mn)));
@@ -111,8 +112,7 @@ const simplex = new SimplexNoise();
 		  p5.stroke(TlineColor);
 		  p5.line(0, x, canvasWidth, x);
 		}
-		var randomValue = p5.random();
-//		p5.noFill();
+		p5.noFill(TlineColor);
 		p5.stroke(MtopColor);
 		p5.strokeWeight(dim * 0.0015);
 		
@@ -140,7 +140,7 @@ const simplex = new SimplexNoise();
 		//second angel rotation 
   
 		//  strokeWeight(2);
-		p5.noFill();
+//		p5.noFill();
 		p5.stroke(p5.color(255, 255, 255));
 //		p5.noFill();
 		let secondAngle = p5.map(sc, 0, 59, 0, 360);
@@ -156,6 +156,7 @@ const simplex = new SimplexNoise();
 
 
 
+		const randomValue = p5.random();
 
 		if(randomValue < 0.97){
 			p5.text("BetterDays", 25, 55);
@@ -224,7 +225,7 @@ const simplex = new SimplexNoise();
 	p5.endShape();
 	}
 	  
-	const drawSkull=(p5, skullX, skullY, skullWidth, skullHeight, MbottomColor) =>{
+	const drawSkull=(p5, skullX, skullY, skullWidth, skullHeight, MbottomColor, canvasWidth, canvasHeight) =>{
 
 		// Change the fill color to a random color.
 		var funColor = p5.random(30, 32);
