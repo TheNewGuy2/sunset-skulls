@@ -143,10 +143,10 @@ import Sketch from "react-p5";
 	const drawSkull=(p5, skullX, skullY, skullWidth, skullHeight, MbottomColor, canvasWidth, canvasHeight) =>{
 
 		// Change the fill color to a random color.
-		var funColor = p5.random(1,25);
-		var funColor2 = p5.random(25, 55);
+		var funColor = p5.random(30, 32);
+		var funColor2 = p5.random(1, 2);
 	  //  fill(random(255), random(255), random(255));
-	  	p5.fill(funColor,funColor2, funColor);
+	  	p5.fill(funColor,funColor2, funColor*2);
 	  	p5.noStroke();
 	  
 		// Draw the top circle part of the skull.
@@ -242,12 +242,13 @@ import Sketch from "react-p5";
 		  teethWidth,
 		  teethHeight);
 	  
-		p5.fill(funColor, funColor2, funColor);
+		p5.fill(funColor, funColor2, funColor*2);
 		p5.rect(skullX-(teethWidth/2),
 		  skullY+skullHeight/1.8,
 		  teethWidth*1.2,
 		  teethHeight/2);
 	  
+		p5.fill(funColor, funColor2, funColor*2);
 		p5.rect(skullX-teethWidth/2,
 		  skullY+skullHeight/2.8,
 		  teethWidth,
