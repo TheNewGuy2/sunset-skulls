@@ -10,7 +10,7 @@ import Sketch from "react-p5";
 // It provides 4D noise and returns a value between -1 and 1
 
 
-    const Day7 = (props) => {
+    const Day6 = (props) => {
 	const setup = (p5, canvasParentRef) => {
 		// use parent to render the canvas in this ref
 		// (without that p5 will render the canvas outside of your component)
