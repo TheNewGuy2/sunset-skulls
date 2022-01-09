@@ -1,13 +1,23 @@
 import React from "react";
 import Sketch from "react-p5";
+import { SimplexNoise } from "simplex-noise";
 
 //	let x = 50;
 //	let y = 50;
 //
+//let dragging = false;
+let minFrequency = 0.5;
+let maxFrequency = 2;
+let minAmplitude = 0.05;
+let maxAmplitude = 0.5;
+//const canvasWidth = 600;
+//const canvasHeight = 600;
+
 
 // Included in index.html
 // This is an alternative to p5.js builtin 'noise' function,
 // It provides 4D noise and returns a value between -1 and 1
+const simplex = new SimplexNoise();
 
 
     const Day6 = (props) => {
@@ -17,6 +27,8 @@ import Sketch from "react-p5";
 		const canvasWidth = 600;
 		const canvasHeight = 600;
 		p5.createCanvas(canvasWidth, canvasHeight).parent(canvasParentRef);
+		p5.mouseX = canvasWidth / 2;
+		p5.mouseY = canvasHeight / 2;
 		p5.randomSeed(5000)
 		p5.frameRate(p5.random(2, 3))
 		p5.angleMode(p5.DEGREES);
@@ -31,11 +43,15 @@ import Sketch from "react-p5";
 		// NOTE: Do not use setState in the draw function or in functions that are executed
 		// in the draw function...
 		// please use normal variables or class properties for these purposes
+		const canvasWidth = 600;
+		const canvasHeight = 600;
+		const frequency = p5.lerp(minFrequency, maxFrequency, p5.mouseX / canvasWidth);
+		const amplitude = p5.lerp(minAmplitude, maxAmplitude, p5.mouseY / canvasHeight);
+		
+		const dim = Math.min(canvasWidth, canvasHeight);
 		const m = 4;//4
 		const n = 10;//10
 		const o = 22;//22
-		const canvasWidth = 600;
-		const canvasHeight = 600;
 		const hr = p5.hour();
 		const mn = p5.minute();
 		const sc = p5.second();
@@ -54,7 +70,7 @@ import Sketch from "react-p5";
 		const MbottomColor = p5.color(MbottomR, MbottomG, MbottomB);
 		
 		for(let y = 0; y < 0; y++) {
-		  const MlineColor = p5.lerpColor(MtopColor, MbottomColor, y / p5.height);
+		  const MlineColor = p5.lerpColor(MtopColor, MbottomColor, y / p5.canvasHeight);
 	  
 		  p5.stroke(MlineColor);
 		  p5.line(0, y, canvasWidth, y);
@@ -88,6 +104,7 @@ import Sketch from "react-p5";
 	  
 		const TtopColor = p5.color(TtopR, TtopG, TtopB, sc * 3 );
 		const TbottomColor = p5.color(TbottomR, TbottomG, TbottomB, mn * 3);
+		const TlineColor = p5.lerpColor(TtopColor, TbottomColor, ((sc)/(canvasHeight+mn)));
 		
 		for(let x = 0; x < p5.height; x++) {
 		  const TlineColor = p5.lerpColor(TtopColor, TbottomColor, ((x+sc)/(canvasHeight+mn)));
@@ -95,12 +112,37 @@ import Sketch from "react-p5";
 		  p5.stroke(TlineColor);
 		  p5.line(0, x, canvasWidth, x);
 		}
-		var randomValue = p5.random();
+		p5.noFill(TlineColor);
+		p5.stroke(MtopColor);
+		p5.strokeWeight(dim * 0.0015);
+		
+		const time = p5.millis() / 10;
+		const rows = 3.33;
+	  
+		// Draw each line
+		for (let y = 0; y < rows; y++) {
+		  // Determine the Y position of the line
+		  const v = rows <= 1 ? 0.5 : y / (rows - 1);
+		  const py = v * canvasHeight;
+		  drawNoiseLine({
+				v,
+				start: [ 0, py ],
+				end: [ p5.width, py ],
+				amplitude: amplitude * canvasHeight,
+				frequency,
+				time: time * 0.0005,
+				steps: 5,
+				p5
+		  	});
+		}
+	  
+
 		//second angel rotation 
   
 		//  strokeWeight(2);
+//		p5.noFill();
 		p5.stroke(p5.color(255, 255, 255));
-		p5.noFill();
+//		p5.noFill();
 		let secondAngle = p5.map(sc, 0, 59, 0, 360);
 		p5.arc(p5.width/2, p5.height/2, 320, 320, -90, secondAngle-90);
 		//minute angel rotation 
@@ -114,6 +156,7 @@ import Sketch from "react-p5";
 
 
 
+		const randomValue = p5.random();
 
 		if(randomValue < 0.97){
 			p5.text("BetterDays", 25, 55);
@@ -144,6 +187,44 @@ import Sketch from "react-p5";
 //		return <Sketch setup={setup} draw={draw} drawSkull={drawSkull} />;
  	  
 	};
+
+	const drawNoiseLine = (opt = {}) =>{
+	const {
+	  v,
+	  start,
+	  end,
+	  steps = 10,
+	  frequency = 1,
+	  time = 0,
+	  amplitude = 1,
+	  p5
+	} = opt;
+	
+	const [ xStart, yStart ] = start;
+	const [ xEnd, yEnd ] = end;
+	 
+	// Create a line by walking N steps and interpolating
+	// from start to end point at each interval
+	p5.beginShape();
+	for (let i = 0; i < steps; i++) {
+	  // Get interpolation factor between 0..1
+	  const t = steps <= 1 ? 0.5 : i / (steps - 1);
+	  
+	  // Interpolate X position
+	  const x = p5.lerp(xStart, xEnd, t);
+		  
+	  // Interpolate Y position
+	  let y = p5.lerp(yStart, yEnd, t);
+	  
+	  // Offset Y position by noise
+	  y += (simplex.noise3D(t * frequency + time, v * frequency, time)) * amplitude;
+	  
+	  // Place vertex
+	  p5.vertex(x, y);
+	}
+	p5.endShape();
+	}
+	  
 	const drawSkull=(p5, skullX, skullY, skullWidth, skullHeight, MbottomColor, canvasWidth, canvasHeight) =>{
 
 		// Change the fill color to a random color.
