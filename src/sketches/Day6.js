@@ -10,8 +10,6 @@ let minFrequency = 0.5;
 let maxFrequency = 2;
 let minAmplitude = 0.05;
 let maxAmplitude = 0.5;
-let frequency = 0;
-let amplitude = 0;
 //const canvasWidth = 600;
 //const canvasHeight = 600;
 
@@ -47,7 +45,6 @@ const simplex = new SimplexNoise();
 		// please use normal variables or class properties for these purposes
 		const canvasWidth = 600;
 		const canvasHeight = 600;
-		const simplex = new SimplexNoise();
 		const frequency = p5.lerp(minFrequency, maxFrequency, p5.mouseX / canvasWidth);
 		const amplitude = p5.lerp(minAmplitude, maxAmplitude, p5.mouseY / canvasHeight);
 		
