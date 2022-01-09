@@ -10,6 +10,8 @@ let minFrequency = 0.5;
 let maxFrequency = 2;
 let minAmplitude = 0.05;
 let maxAmplitude = 0.5;
+let frequency = 0;
+let amplitude = 0;
 //const canvasWidth = 600;
 //const canvasHeight = 600;
 
@@ -45,6 +47,7 @@ const simplex = new SimplexNoise();
 		// please use normal variables or class properties for these purposes
 		const canvasWidth = 600;
 		const canvasHeight = 600;
+		const simplex = new SimplexNoise();
 		const frequency = p5.lerp(minFrequency, maxFrequency, p5.mouseX / canvasWidth);
 		const amplitude = p5.lerp(minAmplitude, maxAmplitude, p5.mouseY / canvasHeight);
 		
@@ -70,7 +73,7 @@ const simplex = new SimplexNoise();
 		const MbottomColor = p5.color(MbottomR, MbottomG, MbottomB);
 		
 		for(let y = 0; y < 0; y++) {
-		  const MlineColor = p5.lerpColor(MtopColor, MbottomColor, y / p5.height);
+		  const MlineColor = p5.lerpColor(MtopColor, MbottomColor, y / p5.canvasHeight);
 	  
 		  p5.stroke(MlineColor);
 		  p5.line(0, y, canvasWidth, y);
@@ -123,12 +126,12 @@ const simplex = new SimplexNoise();
 		for (let y = 0; y < rows; y++) {
 		  // Determine the Y position of the line
 		  const v = rows <= 1 ? 0.5 : y / (rows - 1);
-		  const py = v * p5.height;
+		  const py = v * canvasHeight;
 		  drawNoiseLine({
 				v,
 				start: [ 0, py ],
 				end: [ p5.width, py ],
-				amplitude: amplitude * p5.height,
+				amplitude: amplitude * canvasHeight,
 				frequency,
 				time: time * 0.0005,
 				steps: 5,
